@@ -1,5 +1,4 @@
 # Editor Files
-/*.xml
-/*.iml
-/DS_Store/
 /.idea/
+# Mac specific files
+/DS_Store/
