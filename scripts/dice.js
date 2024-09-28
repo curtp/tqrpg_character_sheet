@@ -40,7 +40,6 @@ async function rollDice() {
         rolledDie.push({dieType: "ability", dieLabel: "Ability", group: rolledDie.length});
         Box.add("1d6", {themeColor: document.getElementById("ability-color").value})
     }
-    console.log(rolledDie)
 }
 
 function rollDie(dieSelectName, qtySelectName, dieColorPickerName) {
@@ -48,7 +47,6 @@ function rollDie(dieSelectName, qtySelectName, dieColorPickerName) {
     const qtySelect = document.getElementById(qtySelectName);
     const qty = qtySelect.options[qtySelect.selectedIndex].value;
     const die = dieSelect.options[dieSelect.selectedIndex].value;
-    console.log(document.getElementById(dieColorPickerName).value);
     if (qty > 0) {
         Box.add(`${qty}${die}`, {themeColor: document.getElementById(dieColorPickerName).value});
     }
@@ -57,7 +55,6 @@ function rollDie(dieSelectName, qtySelectName, dieColorPickerName) {
 function rollAttributeDie(qtySelectName) {
     const qtySelect = document.getElementById(qtySelectName);
     const qty = qtySelect.options[qtySelect.selectedIndex].value;
-    console.log(`${qtySelectName} - ${qty}`)
     return qty > 0;
 }
 
@@ -88,13 +85,11 @@ function displayResults(results) {
             dieValues.push(die.value)
         });
         dieValues.sort(function(a, b){return b-a});
-        console.log(`${roll.dieType}: ${dieValues.join(", ")}`);
         display.push({roll: roll, values: Array.from(dieValues)})
         dieValues.length = 0;
     });
 
     display.forEach((toDisplay) => {
-        console.log(toDisplay);
         var resultDisplayArea = document.getElementById(`${toDisplay.roll.dieType}-result`);
         resultDisplayArea.textContent = `${toDisplay.roll.dieLabel}: ${toDisplay.values.join(", ")}`
     });
@@ -102,9 +97,7 @@ function displayResults(results) {
 
 function clearResults() {
     const resultArea = document.getElementById("results-area");
-    console.log(resultArea);
     const allElements = resultArea.querySelectorAll("*");
-    console.log(allElements)
     allElements.forEach(element => {
        if (element.id.endsWith("-result")) {
            element.textContent = null;
