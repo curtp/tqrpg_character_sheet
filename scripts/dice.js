@@ -21,6 +21,7 @@ let initialized = false;
 let rolledDie = [];
 
 async function rollDice() {
+    document.body.style.cursor = 'wait'
     if (!initialized) {
         await Box.init()
         initialized = true;
@@ -75,6 +76,7 @@ button.addEventListener("click", (e) => {
 
 Box.onRollComplete = (results) => {
     displayResults(results);
+    document.body.style.cursor = 'default'
 };
 
 function displayResults(results) {
