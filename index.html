@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Quick RPG Character Sheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="character-sheet">
+        <h1>The Quick RPG Character Sheet</h1>
+        <div class="form-group">
+            <select id="character-select" name="character-select" style="max-width: 45%;"></select>
+            <button name="save" onclick="saveCharacter();">Save</button>
+            <button name="delete" onclick="confirmAndDeleteCharacter('character-select');">Delete</button>
+        </div>
+
+        <form id="character">
+            <div class="two-columns">
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input type="text" id="role" name="role">
+                    </div>
+                </div>
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="quirk">Quirk</label>
+                        <input type="text" id="quirk" name="quirk">
+                    </div>
+                    <div class="form-group">
+                        <label for="money">Money</label>
+                        <input type="text" id="money" name="money">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
+            <div class="three-columns">
+                <div class="checkbox-group three-column">
+                    <label for="strain1" class="checkbox-label">Strain</label>
+                    <div class="checkbox-container" id="strain-container">
+                        <input type="checkbox" id="strain1" name="strain">
+                        <input type="checkbox" id="strain2" name="strain">
+                        <input type="checkbox" id="strain3" name="strain">
+                    </div>
+                </div>
+
+                <div class="checkbox-group three-column">
+                    <label for="ability1" class="checkbox-label">Ability</label>
+                    <div class="checkbox-container" id="ability-container">
+                        <input type="checkbox" id="ability1" name="ability">
+                        <input type="checkbox" id="ability2" name="ability">
+                        <input type="checkbox" id="ability3" name="ability">
+                        <input type="checkbox" id="ability4" name="ability">
+                        <input type="checkbox" id="ability5" name="ability">
+                        <input type="checkbox" id="ability6" name="ability">
+                    </div>
+                </div>
+
+                <div class="three-column open-tray-button">
+                    <button type="button" onclick="openDiceTray()">Open Dice Tray</button>
+                </div>
+            </div>
+
+            <div class="three-columns">
+                <div class="three-column attribute-group">
+                    <label for="mind" class="attribute-label">Mind</label>
+                    <div class="attribute-selects">
+                        <select id="mind" name="mind" class="attribute-select" >
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                        <select id="mind-max" name="mind-max" class="attribute-select">
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="three-column attribute-group">
+                    <label for="body" class="attribute-label">Body</label>
+                    <div class="attribute-selects">
+                        <select id="body" name="body" class="attribute-select">
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                        <select id="body-max" name="body-max" class="attribute-select">
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="three-column attribute-group">
+                    <label for="will" class="attribute-label">Will</label>
+                    <div class="attribute-selects">
+                        <select id="will" name="will" class="attribute-select">
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                        <select id="will-max" name="will-max" class="attribute-select">
+                            <option value="d4">d4</option>
+                            <option value="d6">d6</option>
+                            <option value="d8">d8</option>
+                            <option value="d10">d10</option>
+                            <option value="d12">d12</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gear">Gear/Abilities</label>
+                <textarea id="gear" name="gear"></textarea>
+            </div>
+        </form>
+        <div class="footer">
+            <a href="https://squidhead-games.itch.io/the-quick-rpg" target="_blank">The Quick RPG</a><br>
+            By Squidhead Games
+        </div>
+    </div>
+
+    <div id="diceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal-button" onClick="closeDiceTray()">&times;</span>
+                <strong style="font-size: 24px;">Dice Tray</strong>
+            </div>
+            <div class="die-row">
+                <div class="die-row">
+                    <strong>Attribute Die</strong>
+                </div>
+                <div class="die-column">
+                    <select id="attribute-die-select"></select>
+                </div>
+                <div class="die-column">
+                    <select id="attribute-qty" class="attribute-select"><option value="1">1</option><option value="2">2</option></select>
+                    <input type="color" id="attribute-color" class="color-picker" value="#b8b8ff">
+                </div>
+                <div class="die-column">
+                    <input type="checkbox" id="ability-die-check">Roll Ability Die</input>
+                    <input type="color" id="ability-color" class="color-picker" value="#a9fea9">
+                </div>
+            </div>
+            <div class="die-row">
+                <div class="die-row">
+                    <strong>Difficulty Die</strong>
+                </div>
+                <div class="die-column">
+                    <select id="difficulty-die-select">
+                        <option value="d4">d4</option>
+                        <option value="d6">d6</option>
+                        <option value="d8">d8</option>
+                        <option value="d10">d10</option>
+                        <option value="d12">d12</option>
+                    </select>
+                </div>
+                <div class="die-column">
+                    <select id="difficulty-qty" class="attribute-select">
+                        <option value="0" selected>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                    <input type="color" id="difficulty-color" class="color-picker" value="#ff9e9e">
+                </div>
+                <div class="die-column">
+                    <button id="rollem">Roll em!</button>
+                </div>
+            </div>
+            <div class="die-row" id="results-area">
+                <div class="die-column" class="result-column">
+                    <span id="attribute-result" class="roll-result"></span>
+                </div>
+                <div class="die-column" class="result-column">
+                    <span id="ability-result" class="roll-result"></span>
+                </div>
+                <div class="die-column" class="result-column">
+                    <span id="difficulty-result" class="roll-result"></span>
+                </div>
+            </div>
+            <div id="dice-box"></div>
+        </div>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/code.js"></script>
+    <script src="scripts/dice.js" type="module"></script>
+</body>
+</html>
