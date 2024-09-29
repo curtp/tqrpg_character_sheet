@@ -50,10 +50,6 @@ function prepNameForKey(name) {
     return name.toLowerCase().replace(/\s/g, "");
 }
 
-function makeStorageKey(name) {
-    return `${storageKeyPrefix}${prepNameForKey(name)}`;
-}
-
 function setAttributeDieSizeInDiceModal(attributeName) {
     const currentDieSelect = document.getElementById(attributeName);
     const dieModalSelect = document.getElementById("attribute-die-select");
@@ -88,8 +84,6 @@ function capitalizeFirstLetter(string) {
 
 let hasUnsavedChanges = false;
 const storageKeyPrefix = "TQRPG_Character_";
-const modal = document.getElementById("diceModal");
-const span = document.getElementsByClassName("close")[0];
 
 // Add event listeners for auto-resizing textareas
 document.getElementById('description').addEventListener('input', function() {

@@ -121,3 +121,7 @@ function populateCharacterSelect(selectId) {
         selectElement.add(option);
     });
 }
+
+function makeStorageKey(name) {
+    return `${storageKeyPrefix}${prepNameForKey(name)}`;
+}
