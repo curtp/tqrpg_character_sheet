@@ -45,7 +45,9 @@ function characterToQueryParam() {
 }
 
 function characterFromQueryParam(param) {
-    return LZString.decompressFromEncodedURIComponent(param);
+    const char = JSON.parse(LZString.decompressFromEncodedURIComponent(param));
+    console.log(char);
+    return char;
 }
 
 function loadCharacter(characterName) {
