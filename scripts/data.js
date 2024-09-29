@@ -40,6 +40,7 @@ function characterFormToJSON() {
 function characterToQueryParam() {
     const char = characterFormToJSON();
     const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(char));
+    console.log(compressed)
     return compressed;
 }
 
