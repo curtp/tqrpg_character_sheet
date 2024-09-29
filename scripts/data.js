@@ -3,6 +3,14 @@ function saveCharacter() {
         return;
     }
     const storageKey = makeStorageKey(document.getElementById('name').value);
+    const jsonData = characterFormToJSON();
+
+    localStorage.setItem(storageKey, JSON.stringify(jsonData));
+    populateCharacterSelect('character-select');
+    hasUnsavedChanges = false;
+}
+
+function characterFormToJSON() {
     const form = document.getElementById("character");
     const jsonData = {};
 
@@ -26,9 +34,17 @@ function saveCharacter() {
         jsonData[checkbox.id] = checkbox.checked;
     });
 
-    localStorage.setItem(storageKey, JSON.stringify(jsonData));
-    populateCharacterSelect('character-select');
-    hasUnsavedChanges = false;
+    return jsonData;
+}
+
+function characterToQueryParam() {
+    const char = characterFormToJSON();
+    const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(char));
+    return compressed;
+}
+
+function characterFromQueryParam(param) {
+    return LZString.decompressFromEncodedURIComponent(param);
 }
 
 function loadCharacter(characterName) {
